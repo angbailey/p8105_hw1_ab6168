@@ -8,6 +8,7 @@ Loading library and dataset
 
 ```{r}
 library(moderndive)
+library(tidyverse)
 data("early_january_weather")
 ```
 
@@ -17,10 +18,21 @@ data("early_january_weather")
 -   The dataset has `r nrow(early_january_weather)` rows and `r ncol(early_january_weather)` columns.
 -   The mean temperature is `r mean(early_january_weather$temp)`.
 
-##Scatter plot
-ggplot(early_january_weather, aes(x = time_hour, y = temp) + ggeom_point(aes(color = humid))
+## Scatter plot of Time vs. Temp
+```{r}
+ggp_weather = ggplot(early_january_weather, aes(x = time_hour, y = temp)) +
+  geom_point(aes(color = humid))
 
-#ggsave("ggp_weather.pdf", ggp_weather)
+ggp_weather
+```
+
+
+Saving scatter plot
+```{r}
+ggsave("ggp_weather.pdf", ggp_weather)
+```
+
+
 
 
 
