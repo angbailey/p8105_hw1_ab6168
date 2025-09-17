@@ -4,14 +4,15 @@ output: github_document
 date: "2025-09-16"
 ---
 
-Loading library and dataset
+Loading libraries and dataset
 
-```{r}
+```{r message = FALSE}
 library(moderndive)
 library(tidyverse)
 data("early_january_weather")
 ```
 
+# Problem 1
 ## Description of dataset
 
 -   The variables in the dataset are `r colnames(early_january_weather)`
@@ -26,11 +27,80 @@ ggp_weather = ggplot(early_january_weather, aes(x = time_hour, y = temp)) +
 ggp_weather
 ```
 
+The scatter plot shows that temperature generally increases over time, having an overall upward trend with day to day variability. In higher temperatures, there is higher humidity and in lower temperatures, while lower humidity is more frequent at lower temperatures.
 
-Saving scatter plot
+
+**Saving scatter plot**
 ```{r}
 ggsave("ggp_weather.pdf", ggp_weather)
 ```
+
+
+# Problem 2
+## Creating Dataframe
+```{r}
+df = tibble(
+  samp = rnorm(10),
+  greater_0 = samp > 0,
+  vec_char = character(length = 10),
+  vec_factor = factor(rep(c("level1", "level2", "level3"), length = 10))
+)
+```
+
+
+
+## Mean of Variables
+**Sample mean**
+```{r}
+mean_samp = mean(pull(df, samp))
+mean_samp
+```
+
+**Logical vector mean**
+```{r}
+mean_greater_0 = mean(pull(df, greater_0))
+mean_greater_0
+```
+
+**Character vector mean**
+```{r}
+mean_vec_char = mean(pull(df, vec_char))
+mean_vec_char
+```
+**Factor vector mean**
+```{r}
+mean_vec_factor = mean(pull(df, vec_factor))
+mean_vec_factor
+```
+The sample and logical vector variables return a mean, while the character vector and factor vector variables return NA.
+
+
+**Converting character, logical, and factor variables**
+```{r eval = FALSE}
+numeric_char = as.numeric(pull(df,vec_char))
+numeric_log = as.numeric(pull(df,greater_0))
+numeric_fac = as.numeric(pull(df,vec_factor))
+```
+
+After applying the as.numeric function, the elements in the logical variable are assigned 0 or 1. The elements in the factor variable are assigned 1,2, or 3. And the elements in the character variable are each assigned NA. The as.numeric function converts the object to a numeric data type. This explains what happens when trying to take the mean as the original argument was not a numeric vector. 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
