@@ -42,7 +42,7 @@ ggsave("ggp_weather.pdf", ggp_weather)
 df = tibble(
   samp = rnorm(10),
   greater_0 = samp > 0,
-  vec_char = character(length = 10),
+  vec_char = c("a","b","c","d","e","f","g","h","i","j"),
   vec_factor = factor(rep(c("level1", "level2", "level3"), length = 10))
 )
 ```
@@ -76,11 +76,12 @@ The sample and logical vector variables return a mean, while the character vecto
 
 
 **Converting character, logical, and factor variables**
-```{r eval = FALSE}
+```{r}
 numeric_char = as.numeric(pull(df,vec_char))
 numeric_log = as.numeric(pull(df,greater_0))
 numeric_fac = as.numeric(pull(df,vec_factor))
 ```
+
 
 After applying the as.numeric function, the elements in the logical variable are assigned 0 or 1. The elements in the factor variable are assigned 1,2, or 3. And the elements in the character variable are each assigned NA. The as.numeric function converts the object to a numeric data type. This explains what happens when trying to take the mean as the original argument was not a numeric vector. 
 
